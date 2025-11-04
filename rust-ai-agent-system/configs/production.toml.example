@@ -1,0 +1,58 @@
+# Production Environment Configuration
+# This file should be created during deployment with actual production values
+
+[api]
+host = "0.0.0.0"
+port = 8080
+workers = 8
+cors_origins = ["https://your-production-domain.com"]
+
+[database]
+url = "${DATABASE_URL}"
+max_connections = 20
+min_connections = 5
+connect_timeout = 30
+idle_timeout = 300
+max_lifetime = 1800
+
+[mcp]
+server_port = 3000
+max_connections = 500
+timeout_seconds = 30
+retry_attempts = 3
+
+[security]
+jwt_secret = "${JWT_SECRET}"
+jwt_expiration = 86400  # 24 hours
+api_key_length = 32
+password_min_length = 8
+
+[logging]
+level = "info"
+format = "json"
+file_path = "/var/log/mcp-platform/app.log"
+max_file_size = 52428800  # 50MB
+max_files = 10
+
+[redis]
+url = "${REDIS_URL}"
+pool_max_open = 20
+pool_max_idle = 10
+pool_timeout = 30
+
+[monitoring]
+metrics_port = 9090
+health_check_interval = 60
+performance_sampling_rate = 0.01
+
+[external_apis]
+# Production API keys should be set via environment variables
+# openai_api_key = "${OPENAI_API_KEY}"
+# anthropic_api_key = "${ANTHROPIC_API_KEY}"
+
+[features]
+enable_debug_mode = false
+enable_metrics = true
+enable_tracing = true
+enable_rate_limiting = true
+enable_caching = true
