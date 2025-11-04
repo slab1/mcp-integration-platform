@@ -1,0 +1,77 @@
+[package]
+name = "mcp-integration-platform"
+version = "1.0.0"
+edition = "2021"
+description = "MCP Integration Platform - The simplest way to integrate AI agents into your applications"
+license = "MIT"
+repository = "https://github.com/slab1/mcp-integration-platform"
+keywords = ["ai", "agents", "mcp", "integration", "rust"]
+categories = ["web-programming", "api-bindings"]
+
+[[bin]]
+name = "mcp-platform"
+path = "src/main.rs"
+
+[[bin]]
+name = "mcp-simple"
+path = "src/main_simple.rs"
+
+[dependencies]
+# Web Framework
+actix-web = "4.0"
+axum = { version = "0.7", features = ["macros"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "compression-gzip", "trace"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Async Runtime
+tokio = { version = "1.0", features = ["full"] }
+futures = "0.3"
+async-stream = "0.3"
+
+# Error Handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Logging and Tracing
+tracing = { version = "0.1", features = ["async-await"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+tracing-appender = "0.2"
+
+# Database
+sqlx = { version = "0.7", features = ["runtime-tokio-native-tls", "postgres", "uuid", "chrono", "json"] }
+
+# Retry Logic
+tokio-retry = "0.3"
+
+# API Documentation
+utoipa = { version = "4.0", features = ["axum_extras"] }
+utoipa-swagger-ui = { version = "6.0", features = ["axum"] }
+
+# Configuration
+config = "0.14"
+
+# Additional utilities
+uuid = { version = "1.0", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+async-trait = "0.1"
+clap = { version = "4.0", features = ["derive"] }
+
+# Security
+bcrypt = "0.15"
+jsonwebtoken = "9.2"
+rand = "0.8"
+
+[dev-dependencies]
+tokio-test = "0.4"
+mockall = "0.12"
+tempfile = "3.0"
+
+[features]
+default = ["production"]
+development = []
+production = []
+integration-tests = []
